@@ -70,6 +70,7 @@ def textmetric():
         tomet = float(k) * 1000
         tocent = tomet * 100
         tomil = tocent * 10
+        toinches = float(tomil) / 25.4
         toburger = toinches / burgerheight
         print(str(k) + ' kilometers is roughly ' + str(toburger) + ' burgers stacked vertically')
     else:
