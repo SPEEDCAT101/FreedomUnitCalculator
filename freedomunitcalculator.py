@@ -1,8 +1,8 @@
 burgerheight = 2.75
 
-def textimperial():
+def fromimperial():
     global burgerheight
-    print('Mile (M), Yard (Y), Feet (F), Inches (I)')
+    print('Mile (M), Nautical Mile (NM), Yard (Y), Feet (F), Inches (I)')
     determiner = input('')
     if determiner == 'M' or determiner == 'm':
         print('Enter Mile Number: ')
@@ -14,6 +14,17 @@ def textimperial():
         print('Yards: ' + str(toyards) + ' | Feet: ' + str(tofeet) + ' | Inches: ' + str(toinches))
         print('\n')
         print(str(miles) + ' miles is roughly ' + str(toburger) + ' burgers stacked vertically')
+    elif determiner == 'NM' or determiner == 'nm':
+        print('Enter Nautical Mile Number: ')
+        miles = input('')
+        nmiles = float(miles) * 1.151
+        toyards = float(nmiles) * 1760
+        tofeet = toyards * 3
+        toinches = float(tofeet) * 12
+        toburger = toinches / burgerheight
+        print('Yards: ' + str(toyards) + ' | Feet: ' + str(tofeet) + ' | Inches: ' + str(toinches))
+        print('\n')
+        print(str(miles) + ' nautical miles is roughly ' + str(toburger) + ' burgers stacked vertically')
     elif determiner == 'Y' or determiner == 'y':
         print('Enter Yard Number:')
         yardy = input('')
@@ -39,7 +50,7 @@ def textimperial():
     else:
         print('Invalid Entry, Re-Launch To Try Again')
 
-def textmetric():
+def frommetric():
     global burgerheight
     print('Millimeter (MM), Centimeter (C), Meter (M), Kilometer (K)')
     determiner = input('')
@@ -75,20 +86,40 @@ def textmetric():
         print(str(k) + ' kilometers is roughly ' + str(toburger) + ' burgers stacked vertically')
     else:
         print('Invalid Entry, Re-Launch To Try Again')
-        
-print('Imperial (I) or Metric (M)')
-unity = input('')
-if unity == 'I' or unity == 'i':
+
+def fromburger():
+    print('Enter Burger Amount:')
+    burgercount = input('')
+    burgerusable = float(burgercount)
+    theinches = burgerusable * burgerheight
+    thefeet = theinches * 12
+    theyards = thefeet * 3
+    themiles = theyards * 1760
+
+print('Convert To (T) or From Burger (F)')
+whatone = input('')
+if whatone == 't' or whatone == 'T':
+    print('Imperial (I) or Metric (M)')
+    unity = input('')
+    if unity == 'I' or unity == 'i':
+        try:
+            fromimperial()
+        except Exception as e:
+            print('Well an error occurred, probably entering letters and other non numbers where the numbers should go...')
+            print(e)
+    elif unity == 'M' or unity == 'm':
+        try:
+            frommetric()
+        except Exception as e:
+            print('Well an error occurred, probably entering letters and other non numbers where the numbers should go...')
+            print(e)
+    else:
+        print('Unrecognized Unit')
+elif whatone == 'f' or whatone == 'F':
     try:
-        textimperial()
+        fromburger()
     except Exception as e:
-        print('Well an error occurred, probably entering letters and other non numbers where the numbers should go...')
-        print(e)
-elif unity == 'M' or unity == 'm':
-    try:
-        textmetric()
-    except Exception as e:
-        print('Well an error occurred, probably entering letters and other non numbers where the numbers should go...')
+        print('Well an error occurred, probably entering letters and other non numbers where numbers are supposed to go...')
         print(e)
 else:
-    print('Unrecognized Unit')
+    print('Option not recognized.  ' + str(whatone))
